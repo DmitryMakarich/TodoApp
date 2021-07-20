@@ -1,0 +1,67 @@
+.Todos{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+.Todo {
+    width: 300px;
+    height: 270px;
+    box-shadow: 0 0 0 1px rgb(67, 67, 73);
+    border-radius: 5px;
+    margin: 15px;
+}
+
+.ButtonDelete {
+    display: block;
+    left: 50%;
+
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    padding: .1em 1em calc(.8em + 4px);
+    border-radius: 3px;
+    background: rgb(64,199,129);
+    box-shadow: 0 -3px rgb(53,167,110) inset;
+    transition: 0.2s;
+    margin: auto;
+    margin-bottom: 5px;
+  } 
+.ButtonDelete:hover { background: rgb(53, 167, 110); }
+.ButtonDelete:active {
+    background: rgb(33,147,90);
+    box-shadow: 0 3px rgb(5, 116, 51) inset;
+}
+
+.ButtonEdit {
+    display: block;
+    left: 50%;
+
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    padding: .1em 1em calc(.8em + 3px);
+    border-radius: 3px;
+    background: rgb(24, 145, 192);
+    box-shadow: 0 -3px rgb(6, 72, 134) inset;
+    transition: 0.2s;
+    margin: auto;
+  } 
+.ButtonEdit:hover { background: rgb(11, 5, 100); }
+.ButtonEdit:active {
+    background: rgb(33,147,90);
+    box-shadow: 0 3px rgb(33,147,90) inset;
+}
+
+.Input{
+    margin: 10px;
+}
