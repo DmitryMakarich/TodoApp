@@ -5,7 +5,7 @@ import { LoginMenu } from '../api-authorization/LoginMenu';
 import './NavMenu.css';
 
 
-export class NavMenu extends Component {
+export class NavMenu extends Component<any, any> {
   static displayName = NavMenu.name;
 
   constructor (props) {

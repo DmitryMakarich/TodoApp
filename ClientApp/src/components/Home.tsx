@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import Todo from "./todo/todo";
 import "./todo/todo.css";
 
-export class Home extends Component {
+export class Home extends React.Component<any, any> {
   static displayName = Home.name;
 
   constructor(props) {
@@ -88,7 +88,6 @@ export class Home extends Component {
       <div
         style={{
           textAlign: "center",
-          // margin: '20px'
         }}
       >
         <h1>Todos</h1>
