@@ -1,7 +1,7 @@
 import React from 'react'
 import './todo.css'
 
-class Todo extends React.Component{
+class Todo extends React.Component<any, any>{
 
     render(){
         // console.log('render', this.props)
