@@ -12,7 +12,7 @@ namespace my_app2.Controllers
 {
     [Route("/[controller]")]
     [ApiController]
-    public class TodoController : ControllerBase
+    public class TodoController : Controller
     {
         private Data.ApplicationDbContext _appContext;
 
@@ -32,10 +32,12 @@ namespace my_app2.Controllers
         }
 
         [HttpPost("addTodo")]
-        public void AddTodos(string content)
+        public JsonResult AddTodos(string content)
         {
-            _appContext.Todos.Add(new Todo { Content = content });
+            var context = _appContext.Todos.Add(new Todo { Content = content });
             _appContext.SaveChanges();
+            
+            return Json(context.Entity);
         }
 
         [HttpDelete("deleteTodo")]

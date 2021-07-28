@@ -2,7 +2,7 @@ import React from 'react'
 import './todo.css'
 
 
-const Todo: React.FC<{}> = (props: any) => {
+const Todo: React.FC<any> = (props: any) => {
     return (
         <div className="Todo">
                 <h1>Task {props.index + 1}:</h1>
