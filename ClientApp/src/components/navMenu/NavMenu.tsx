@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import todoStore from "../store/TodoStore"
 import { LoginMenu } from '../api-authorization/LoginMenu';
 import './NavMenu.css';
 
@@ -37,9 +38,25 @@ export class NavMenu extends Component<any, any> {
                 </NavItem>
                 <LoginMenu>
                 </LoginMenu>
+                <form className="form-inline" style={{
+                  marginLeft: "50px"
+                }}>
+                  <input 
+                    className="form-control mr-sm-2" 
+                    type="search" 
+                    placeholder="Search"
+                    aria-label="Search"
+                    onChange={(event) => todoStore.setSearchValue(event.target.value)}
+                  />
+                  <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
               </ul>
             </Collapse>
           </Container>
+          {/* <form className="form-inline">
+            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form> */}
         </Navbar>
       </header>
     );

@@ -35,24 +35,36 @@ const Home: React.FC<any> = inject("todoStore")(observer(({todoStore}) => {
         <button onClick={() => todoStore.addTodo(currentTask)}>Add</button>
 
         <h4 className="Todos">
-          {todoStore.tasks.map((task, key) => {
-            return (
-              <Todo
-                key={key}
-                index={key}
-                taskName={task["content"]}
-                onChangeName={event =>
-                  todoStore.onChangeName(event.target.value, task["id"])
-                }
-                onDelete={() => todoStore.removeTodo(task["id"])}
-                onEdit={() => todoStore.editTodo(task["id"])}
-              />
-            );
-          })}
+
+          {
+              (todoStore.searchTask !== "" 
+                ? todoStore.tasks.filter(task => task["content"].includes(todoStore.searchTask)) : todoStore.tasks).map((task, key) => {
+                  return (
+                    
+                    <Todo
+                      key={key}
+                      index={key}
+                      taskName={task["content"]}
+                      onChangeName={event =>
+                        todoStore.onChangeName(event.target.value, task["id"])
+                      }
+                      onDelete={() => todoStore.removeTodo(task["id"])}
+                      onEdit={() => todoStore.editTodo(task["id"])}
+                    />
+                  );
+                })
+          }
         </h4>
       </div>
   )
 }))
+
+            // if (todoStore.searchTask !== ""){
+            //   console.log("hello")
+            //   return (<div>
+            //     hello
+            //   </div>)
+            // }
 
 
 

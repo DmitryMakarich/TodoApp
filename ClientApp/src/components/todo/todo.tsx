@@ -4,9 +4,18 @@ import './todo.css'
 
 const Todo: React.FC<any> = (props: any) => {
     return (
-        <div className="Todo">
+        <div className="Todo" style={{
+            position: "relative"
+        }}>
                 <h1>Task {props.index + 1}:</h1>
                 <p>{props.taskName}</p>
+                <input type="checkbox" id="myCheck" style={{
+                    position: "absolute",
+                    right: "10px",
+                    top: "10px",
+                    width: "20px",
+                    height: "20px"
+                }}/>
                  <input 
                     type="text"
                     value={props.taskName}

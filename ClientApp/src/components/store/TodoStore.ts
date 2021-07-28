@@ -2,6 +2,7 @@ import {makeAutoObservable} from "mobx"
 
 class TodoStore{
     tasks = []
+    searchTask = ""
 
     constructor(){
         makeAutoObservable(this)
@@ -47,6 +48,14 @@ class TodoStore{
         fetch(`/todo/deleteTodo?id=${id}`, {
             method: "DELETE",
         }).then(() => {this.tasks = this.tasks.filter(todo => todo["id"] !== id)});
+    }
+
+    setSearchValue(value: string){
+        this.searchTask = value
+    }
+
+    searchValue(){
+        
     }
 }
 
