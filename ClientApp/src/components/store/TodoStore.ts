@@ -18,7 +18,10 @@ class TodoStore{
         {
             fetch(`/todo/addTodo?content=${content}`, {
                 method: "POST",
-            }).then(resp => resp.json()).then(x => this.tasks.push(x))
+            }).then(resp => resp.json()).then(x => {
+                // console.log(x)
+                this.tasks.push(x)
+            })
         }
     }    
 
@@ -43,6 +46,24 @@ class TodoStore{
             method: "PUT",
         });
     }
+//////////////////////////////////////////////////////////////////////
+    editCompletedTodo(id: number, complete: boolean){
+
+        console.log(complete)
+
+        this.tasks.map(task => {
+            if (task["id"] === id){
+                task["isComplete"] = complete
+            }
+        })
+
+        fetch(`/todo/editComplete?id=${id}&isComplete=${complete}`, {
+            method: "PUT",
+        })
+
+
+    }
+///////////////////////////////////////////////////////////////
 
     removeTodo(id: number){
         fetch(`/todo/deleteTodo?id=${id}`, {
@@ -52,10 +73,6 @@ class TodoStore{
 
     setSearchValue(value: string){
         this.searchTask = value
-    }
-
-    searchValue(){
-        
     }
 }
 

@@ -9,5 +9,6 @@ namespace my_app2.Models
     {
         public int id { get; set; }
         public string Content { get; set; }
+        public bool isComplete { get; set; }
     }
 }

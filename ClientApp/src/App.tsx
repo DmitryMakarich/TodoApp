@@ -5,9 +5,21 @@ import Home from './components/Home';
 // import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
-
-
+import Loader from "./components/loader/loader"
 import './custom.css'
+
+
+// export default class App extends Component<{}> {
+//   static displayName = App.name;
+
+//   render () {
+//     return (
+//         <Loader></Loader>
+//     );
+//   }
+// }
+
+
 
 
 export default class App extends Component<{}> {

@@ -1,4 +1,5 @@
 import React from 'react'
+import LoadingHOC from '../hoc/loaderHoc/LoadingHOC'
 import './todo.css'
 
 
@@ -9,13 +10,16 @@ const Todo: React.FC<any> = (props: any) => {
         }}>
                 <h1>Task {props.index + 1}:</h1>
                 <p>{props.taskName}</p>
-                <input type="checkbox" id="myCheck" style={{
+                <input type="checkbox" id={"box" + props.index} style={{
                     position: "absolute",
                     right: "10px",
                     top: "10px",
                     width: "20px",
                     height: "20px"
-                }}/>
+                }}
+                defaultChecked={props.isComplete}
+                onClick={props.changeCompleted}
+                />
                  <input 
                     type="text"
                     value={props.taskName}
@@ -39,6 +43,7 @@ const Todo: React.FC<any> = (props: any) => {
     )
 }
 
+export default Todo
 
 // class Todo extends React.Component<any, any>{
 
@@ -70,5 +75,3 @@ const Todo: React.FC<any> = (props: any) => {
 //           );
 //     }
 // }
-
-export default Todo

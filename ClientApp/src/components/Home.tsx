@@ -3,21 +3,12 @@ import {inject} from "mobx-react";
 import React, { useEffect, useState } from "react";
 import Todo from "./todo/todo";
 import "./todo/todo.css";
+import LoadingHOC from "./hoc/loaderHoc/LoadingHOC";
+import Loader from "./loader/loader";
 
 
-const Home: React.FC<any> = inject("todoStore")(observer(({todoStore}) => {
+const Home: React.FC<any> = inject("todoStore")(observer(({todoStore}, props: any) => {
   const [currentTask, setTask] = useState("")
-
-  useEffect(() => {
-          fetch("/todo/todos", {
-                  method: "GET",
-                }).then((x) =>
-                  x.json().then(y =>
-                    todoStore.init(y)
-                  )
-                );
-        }, [])
-
 
   return (
       <div
@@ -33,18 +24,20 @@ const Home: React.FC<any> = inject("todoStore")(observer(({todoStore}) => {
           onChange={(event) => setTask(event.target.value)}
         />
         <button onClick={() => todoStore.addTodo(currentTask)}>Add</button>
-
+        
         <h4 className="Todos">
-
           {
               (todoStore.searchTask !== "" 
                 ? todoStore.tasks.filter(task => task["content"].includes(todoStore.searchTask)) : todoStore.tasks).map((task, key) => {
+
                   return (
                     
                     <Todo
                       key={key}
                       index={key}
                       taskName={task["content"]}
+                      isComplete={task["isComplete"]}
+                      changeCompleted={() => todoStore.editCompletedTodo(task["id"], !task["isComplete"])}/////////////////////////////////////////
                       onChangeName={event =>
                         todoStore.onChangeName(event.target.value, task["id"])
                       }
@@ -59,13 +52,15 @@ const Home: React.FC<any> = inject("todoStore")(observer(({todoStore}) => {
   )
 }))
 
-            // if (todoStore.searchTask !== ""){
-            //   console.log("hello")
-            //   return (<div>
-            //     hello
-            //   </div>)
-            // }
+// export default Home
+export default LoadingHOC(Home) 
 
+// if (todoStore.searchTask !== ""){
+//   console.log("hello")
+//   return (<div>
+//     hello
+//   </div>)
+// }
 
 
 // const Home: React.FC<{}> = () => {
@@ -170,7 +165,7 @@ const Home: React.FC<any> = inject("todoStore")(observer(({todoStore}) => {
 //     )
 // }
 
-export default Home
+
 
 // export class Home extends React.Component<any, any> {
 //   static displayName = Home.name;

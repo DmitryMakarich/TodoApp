@@ -34,7 +34,7 @@ namespace my_app2.Controllers
         [HttpPost("addTodo")]
         public JsonResult AddTodos(string content)
         {
-            var context = _appContext.Todos.Add(new Todo { Content = content });
+            var context = _appContext.Todos.Add(new Todo { Content = content, isComplete = false });
             _appContext.SaveChanges();
             
             return Json(context.Entity);
@@ -59,6 +59,16 @@ namespace my_app2.Controllers
             todo.Content = content;
             _appContext.Entry(todo).State = EntityState.Modified;
             
+            _appContext.SaveChanges();
+        }
+
+        [HttpPut("editComplete")]
+        public void EditComplete(int id, bool isComplete)
+        {
+            Todo todo = _appContext.Todos.Find(id);
+            todo.isComplete = isComplete;
+            _appContext.Entry(todo).State = EntityState.Modified;
+
             _appContext.SaveChanges();
         }
     }
