@@ -9,19 +9,6 @@ import Loader from "./components/loader/loader"
 import './custom.css'
 
 
-// export default class App extends Component<{}> {
-//   static displayName = App.name;
-
-//   render () {
-//     return (
-//         <Loader></Loader>
-//     );
-//   }
-// }
-
-
-
-
 export default class App extends Component<{}> {
   static displayName = App.name;
 
