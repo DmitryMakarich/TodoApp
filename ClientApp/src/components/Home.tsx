@@ -21,7 +21,6 @@ const Home: React.FC<any> = inject("todoStore")(observer(({todoStore}, props: an
       })
     );
 
-      
   }, [])
 
   return (
@@ -43,21 +42,42 @@ const Home: React.FC<any> = inject("todoStore")(observer(({todoStore}, props: an
           {
             (todoStore.searchTask !== "" 
               ? todoStore.tasks.filter(task => task["content"].includes(todoStore.searchTask)) : todoStore.tasks).map((task, key) => {
-                todoStore.count = key
-                return (
-                  <TodoWrapper
-                    key={key}
-                    index={key}
-                    taskName={task["content"]}
-                    isComplete={task["isComplete"]}
-                    changeCompleted={() => todoStore.editCompletedTodo(task["id"], !task["isComplete"])}
-                    onChangeName={event =>
-                      todoStore.onChangeName(event.target.value, task["id"])
-                    }
-                    onDelete={() => todoStore.removeTodo(task["id"])}
-                    onEdit={() => todoStore.editTodo(task["id"])}
-                  />
-                )
+
+                if (todoStore.isComleted){
+                  if(task["isComplete"]){
+                    return (
+                      <TodoWrapper
+                        key={key}
+                        index={key}
+                        taskName={task["content"]}
+                        isComplete={task["isComplete"]}
+                        changeCompleted={() => todoStore.editCompletedTodo(task["id"], !task["isComplete"])}
+                        onChangeName={event =>
+                          todoStore.onChangeName(event.target.value, task["id"])
+                        }
+                        onDelete={() => todoStore.removeTodo(task["id"])}
+                        onEdit={() => todoStore.editTodo(task["id"])}
+                      />)
+                  }
+
+                  return null
+                }
+                else{
+                  return (
+                    <TodoWrapper
+                      key={key}
+                      index={key}
+                      taskName={task["content"]}
+                      isComplete={task["isComplete"]}
+                      changeCompleted={() => todoStore.editCompletedTodo(task["id"], !task["isComplete"])}
+                      onChangeName={event =>
+                        todoStore.onChangeName(event.target.value, task["id"])
+                      }
+                      onDelete={() => todoStore.removeTodo(task["id"])}
+                      onEdit={() => todoStore.editTodo(task["id"])}
+                    />
+                  )
+                }
               })
           }
         </h4>
@@ -66,34 +86,3 @@ const Home: React.FC<any> = inject("todoStore")(observer(({todoStore}, props: an
 }))
 
 export default Home
-
-
-
-
-{/* {
-  (todoStore.searchTask !== "" 
-    ? todoStore.tasks.filter(task => task["content"].includes(todoStore.searchTask)) : todoStore.tasks).map((task, key) => {
-  
-      return (
-          !task["isReady"] ? 
-              <div style={{
-                position: "relative"
-              }}>
-                <Loader key={key}></Loader>
-              </div> :
-              <Todo
-                key={key}
-                index={key}
-                taskName={task["content"]}
-                isComplete={task["isComplete"]}
-                changeCompleted={() => todoStore.editCompletedTodo(task["id"], !task["isComplete"])}
-                onChangeName={event =>
-                  todoStore.onChangeName(event.target.value, task["id"])
-                }
-                onDelete={() => todoStore.removeTodo(task["id"])}
-                onEdit={() => todoStore.editTodo(task["id"])}
-              />
-      );
-    })
-} */}
-

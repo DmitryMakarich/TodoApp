@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import LoadingHOC from "../hoc/loaderHoc/LoadingHOC";
 import Todo from "../todo/todo";
 

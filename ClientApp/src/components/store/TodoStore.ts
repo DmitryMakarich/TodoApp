@@ -3,15 +3,21 @@ import {makeAutoObservable} from "mobx"
 class TodoStore{
     tasks = []
     searchTask = ""
+    isComleted = false
 
     constructor(){
         makeAutoObservable(this)
         this.tasks = []
     }
 
+    showCompleted(){
+        this.isComleted = !this.isComleted
+    }
+
     setReady(){
         this.tasks.map(task => {
             task.isReady = false
+            return task
         })
         
     }
@@ -23,6 +29,7 @@ class TodoStore{
                 task.isReady = true
             }, 1000)
             
+            return task
         })
     }
 
@@ -54,6 +61,8 @@ class TodoStore{
             if (task["id"] === id){
                 task["content"] = content
             }
+
+            return task
         })
     }
 
@@ -64,6 +73,8 @@ class TodoStore{
             if (task["id"] === id){
                 content = task["content"]
             }
+
+            return task
         })
 
         fetch(`/todo/editTodo?id=${id}&content=${content}`, {
@@ -79,6 +90,8 @@ class TodoStore{
             if (task["id"] === id){
                 task["isComplete"] = complete
             }
+
+            return task;
         })
 
         fetch(`/todo/editComplete?id=${id}&isComplete=${complete}`, {
@@ -94,6 +107,8 @@ class TodoStore{
                 if (task["id"] === id){
                     task.isReady = false
                 }
+
+                return task
             })
         }).then(() => {
             setTimeout(() => {

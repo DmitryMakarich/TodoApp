@@ -1,5 +1,4 @@
 import React from 'react'
-import LoadingHOC from '../hoc/loaderHoc/LoadingHOC'
 import './todo.css'
 
 const Todo: React.FC<any> = (props: any) => {
