@@ -5,11 +5,14 @@ import "./todo/todo.css";
 import TodoWrapper from "./Wrappers/Wrapper";
 
 
-const Home: React.FC<any> = inject("todoStore")(observer(({todoStore}, props: any) => {
+const Home: React.FC<any> = inject("todoStore")(observer(({todoStore}) => {
   const [currentTask, setTask] = useState("")
 
-  useEffect(() => {
+  const todos = todoStore.searchTask !== "" 
+    ? todoStore.tasks.filter(task => task["content"].includes(todoStore.searchTask)) 
+    : todoStore.tasks
 
+  useEffect(() => {
     fetch("/todo/todos", {
       method: "GET",
     }).then((x) =>
@@ -27,6 +30,7 @@ const Home: React.FC<any> = inject("todoStore")(observer(({todoStore}, props: an
       <div
         style={{
           textAlign: "center",
+         
         }}
       >
         <h1>Todos</h1>
@@ -40,44 +44,21 @@ const Home: React.FC<any> = inject("todoStore")(observer(({todoStore}, props: an
         
         <h4 className="Todos">
           {
-            (todoStore.searchTask !== "" 
-              ? todoStore.tasks.filter(task => task["content"].includes(todoStore.searchTask)) : todoStore.tasks).map((task, key) => {
-
-                if (todoStore.isComleted){
-                  if(task["isComplete"]){
-                    return (
-                      <TodoWrapper
+              (todoStore.isComleted ? todos.filter(todo => todo["isComplete"]) : todos).map((task, key) => {
+                  return (
+                    <TodoWrapper
                         key={key}
                         index={key}
+                        id={task["id"]}
                         taskName={task["content"]}
                         isComplete={task["isComplete"]}
                         changeCompleted={() => todoStore.editCompletedTodo(task["id"], !task["isComplete"])}
                         onChangeName={event =>
-                          todoStore.onChangeName(event.target.value, task["id"])
+                          todoStore.onChangeName(event.target.value)
                         }
                         onDelete={() => todoStore.removeTodo(task["id"])}
                         onEdit={() => todoStore.editTodo(task["id"])}
-                      />)
-                  }
-
-                  return null
-                }
-                else{
-                  return (
-                    <TodoWrapper
-                      key={key}
-                      index={key}
-                      taskName={task["content"]}
-                      isComplete={task["isComplete"]}
-                      changeCompleted={() => todoStore.editCompletedTodo(task["id"], !task["isComplete"])}
-                      onChangeName={event =>
-                        todoStore.onChangeName(event.target.value, task["id"])
-                      }
-                      onDelete={() => todoStore.removeTodo(task["id"])}
-                      onEdit={() => todoStore.editTodo(task["id"])}
-                    />
-                  )
-                }
+                    />)
               })
           }
         </h4>

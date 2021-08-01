@@ -11,6 +11,7 @@ using my_app2.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace my_app2
 {
@@ -29,6 +30,9 @@ namespace my_app2
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<ITodoRepository, TodoRepository>();
+            services.AddScoped<ITodoService, TodoService>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -89,6 +93,7 @@ namespace my_app2
 
                 if (env.IsDevelopment())
                 {
+                    spa.Options.StartupTimeout = TimeSpan.FromSeconds(120);
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });

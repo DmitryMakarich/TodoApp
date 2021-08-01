@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import todoStore from "../store/TodoStore"
 import { LoginMenu } from '../api-authorization/LoginMenu';
 import './NavMenu.css';
-import { inject, observer } from 'mobx-react';
+import { observer } from 'mobx-react';
 
 @observer
 class NavMenu extends Component<any, any> {
@@ -16,8 +16,13 @@ class NavMenu extends Component<any, any> {
     this.state = {
       collapsed: true
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  handleSubmit(event) {
+    todoStore.showCompleted()
+    event.preventDefault();
+  }
 
   toggleNavbar () {
     this.setState({
@@ -28,20 +33,26 @@ class NavMenu extends Component<any, any> {
   render () {
     return (
       <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
+        <Navbar
+          style={{
+            background: "rgb(79, 132, 172)"
+          }} 
+          className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
           <Container>
-            <NavbarBrand tag={Link} to="/">Todos</NavbarBrand>
+            <NavbarBrand style={{  color: "white",}} tag={Link} to="/">Todos</NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
               <ul className="navbar-nav flex-grow">
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/tasks">Tasks</NavLink>
+                  <NavLink tag={Link} className="text-white" to="/tasks">Tasks</NavLink>
                 </NavItem>
-                <LoginMenu>
+                <LoginMenu >
                 </LoginMenu>
                 <form className="form-inline" style={{
                   marginLeft: "50px"
-                }}>
+                }}
+                  onSubmit={this.handleSubmit}
+                >
                   <input 
                     className="form-control mr-sm-2" 
                     type="search" 
@@ -50,9 +61,10 @@ class NavMenu extends Component<any, any> {
                     onChange={(event) => todoStore.setSearchValue(event.target.value)}
                   />
                   <button
+                    style={{background: "orange"}}
                     className="btn btn-outline-success my-2 my-sm-0"
                     type="submit"
-                    onClick={() => todoStore.showCompleted()}>
+                    >
                       Completed
                   </button>
                 </form>

@@ -15,5 +15,23 @@ html {
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  box-shadow: 0 .25rem .75rem rgba(218, 216, 216, 0.987);
+}
+
+.completeButton {
+  height: 30px;
+  font-weight: 100;
+  color: rgba(0, 0, 0, 0.885);
+  text-decoration: none;
+  text-align: center;
+  padding: .8em 1em calc(.8em + 3px);
+  border-radius: 8px;
+  background: rgb(243, 255, 17);
+  box-shadow: 0 -3px rgb(255, 220, 22) inset;
+  transition: 0.2s;
+} 
+.completeButton:hover { background: rgb(163, 186, 12); }
+.completeButton:active {
+  background: rgb(204, 103, 9);
+  box-shadow: 0 3px rgb(242, 147, 23) inset;
 }

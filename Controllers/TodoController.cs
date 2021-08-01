@@ -14,62 +14,41 @@ namespace my_app2.Controllers
     [ApiController]
     public class TodoController : Controller
     {
-        private Data.ApplicationDbContext _appContext;
+        private readonly ITodoService _todoService;
 
-        private readonly ILogger<TodoController> _logger;
-
-        public TodoController(ILogger<TodoController> logger, Data.ApplicationDbContext appContext)
+        public TodoController(ITodoService todoService)
         {
-            _logger = logger;
-
-            _appContext = appContext;
+            _todoService = todoService;
         }
 
         [HttpGet("todos")]
         public IEnumerable<Todo> Get()
         {
-            return _appContext.Todos.ToList();
+            return _todoService.Get();
         }
 
         [HttpPost("addTodo")]
         public JsonResult AddTodos(string content)
-        {
-            var context = _appContext.Todos.Add(new Todo { Content = content, isComplete = false });
-            _appContext.SaveChanges();
-            
-            return Json(context.Entity);
+        {    
+            return Json(_todoService.AddTodos(content));
         }
 
         [HttpDelete("deleteTodo")]
         public void DeleteTodo(int id)
         {
-            Todo todo = _appContext.Todos.Find(id);
-
-            if (todo != null)
-            {
-                _appContext.Todos.Remove(todo);
-                _appContext.SaveChanges();
-            }
+            _todoService.DeleteTodo(id);
         }
 
         [HttpPut("editTodo")]
         public void EditTodo(int id, string content)
         {
-            Todo todo = _appContext.Todos.Find(id);
-            todo.Content = content;
-            _appContext.Entry(todo).State = EntityState.Modified;
-            
-            _appContext.SaveChanges();
+            _todoService.EditTodo(id, content);
         }
 
         [HttpPut("editComplete")]
         public void EditComplete(int id, bool isComplete)
         {
-            Todo todo = _appContext.Todos.Find(id);
-            todo.isComplete = isComplete;
-            _appContext.Entry(todo).State = EntityState.Modified;
-
-            _appContext.SaveChanges();
+            _todoService.EditComplete(id, isComplete);
         }
     }
 }

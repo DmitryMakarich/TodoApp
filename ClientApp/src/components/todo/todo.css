@@ -10,33 +10,13 @@
 .Todo {
     width: 300px;
     height: 270px;
-    box-shadow: 0 0 0 1px rgb(67, 67, 73);
-    border-radius: 5px;
+    /* box-shadow: 0 0 0 1px rgb(43, 4, 216); */
+    /* background:linear-gradient(rgba(9, 204, 185, 0.5), transparent); */
+    /* background:linear-gradient(rgba(38, 167, 27, 0.5), transparent); */
+    /* background: linear-gradient(rgba(251, 255, 5, 0.953), transparent); */
+    background: linear-gradient(rgba(5, 63, 255, 0.953), rgba(208, 147, 35, 0.981));
+    border-radius: 8px;
     margin: 15px;
-}
-
-.ButtonDelete {
-    display: block;
-    left: 50%;
-
-    width: 150px;
-    height: 50px;
-    text-align: center;
-    font-weight: 700;
-    color: white;
-    text-decoration: none;
-    padding: .1em 1em calc(.8em + 4px);
-    border-radius: 3px;
-    background: rgb(64,199,129);
-    box-shadow: 0 -3px rgb(53,167,110) inset;
-    transition: 0.2s;
-    margin: auto;
-    margin-bottom: 5px;
-  } 
-.ButtonDelete:hover { background: rgb(53, 167, 110); }
-.ButtonDelete:active {
-    background: rgb(33,147,90);
-    box-shadow: 0 3px rgb(5, 116, 51) inset;
 }
 
 .ButtonEdit {
@@ -49,19 +29,44 @@
     font-weight: 700;
     color: white;
     text-decoration: none;
+    padding: .1em 1em calc(.8em + 4px);
+    border-radius: 10px;
+    background: rgb(12, 63, 194);
+    box-shadow: 0 -3px rgb(1, 10, 9) inset;
+    transition: 0.2s;
+    margin: auto;
+    margin-bottom: 5px;
+  } 
+.ButtonEdit:hover { background: rgb(8, 16, 118); }
+.ButtonEdit:active {
+    background: rgb(202, 52, 25);
+    box-shadow: 0 3px rgb(202, 52, 25) inset;
+}
+
+.ButtonDelete {
+    display: block;
+    left: 50%;
+
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
     padding: .1em 1em calc(.8em + 3px);
-    border-radius: 3px;
-    background: rgb(24, 145, 192);
-    box-shadow: 0 -3px rgb(6, 72, 134) inset;
+    border-radius: 10px;
+    background: rgb(194, 69, 69);
+    box-shadow: 0 -3px rgb(33, 39, 23) inset;
     transition: 0.2s;
     margin: auto;
   } 
-.ButtonEdit:hover { background: rgb(11, 5, 100); }
-.ButtonEdit:active {
-    background: rgb(33,147,90);
-    box-shadow: 0 3px rgb(33,147,90) inset;
+.ButtonDelete:hover { background: rgb(255, 1, 1); }
+.ButtonDelete:active {
+    background: rgb(202, 52, 25);
+    box-shadow: 0 3px rgb(202, 52, 25) inset;
 }
 
 .Input{
     margin: 10px;
+    border-radius: 10px;
 }

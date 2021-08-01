@@ -4,6 +4,7 @@ class TodoStore{
     tasks = []
     searchTask = ""
     isComleted = false
+    currentTask = ""
 
     constructor(){
         makeAutoObservable(this)
@@ -19,7 +20,6 @@ class TodoStore{
             task.isReady = false
             return task
         })
-        
     }
 
     getReady(){
@@ -55,36 +55,62 @@ class TodoStore{
 
 
     }    
+    
+    onChangeName(content: string){
 
-    onChangeName(content: string, id: number){
-        this.tasks.map(task => {
-            if (task["id"] === id){
-                task["content"] = content
-            }
-
-            return task
-        })
+        this.currentTask = content
+        console.log("content - ", content)
+        console.log("task - ", this.currentTask)
     }
 
-    editTodo(id: number){
-        let content = ""
-
-        this.tasks.map(task => {
-            if (task["id"] === id){
-                content = task["content"]
-            }
-
-            return task
-        })
-
+    editTodo(id: number, content: string){
         fetch(`/todo/editTodo?id=${id}&content=${content}`, {
             method: "PUT",
-        });
+        }).then(() => {
+            this.tasks.map((task) => {
+                if (task["id"] === id){
+                    task.isReady = false
+                }
+
+                return task
+            })
+        })
+        .then(() => {
+            setTimeout(() => {
+                this.tasks.map(task => {
+                    if(task["id"] === id){
+                        task.isReady = true
+                        task["content"] = content
+                    }
+                })
+            }, 1000)
+        })
+
+
+        // fetch(`/todo/editTodo?id=${id}&content=${this.currentTask}`, {
+        //     method: "PUT",
+        // }).then(() => {
+        //     this.tasks.map((task) => {
+        //         if (task["id"] === id){
+        //             task.isReady = false
+        //         }
+
+        //         return task
+        //     })
+        // })
+        // .then(() => {
+        //     setTimeout(() => {
+        //         this.tasks.map(task => {
+        //             if(task["id"] === id){
+        //                 task.isReady = true
+        //                 task["content"] = this.currentTask
+        //             }
+        //         })
+        //     }, 1000)
+        // })
     }
 
     editCompletedTodo(id: number, complete: boolean){
-
-        console.log(complete)
 
         this.tasks.map(task => {
             if (task["id"] === id){
@@ -103,7 +129,7 @@ class TodoStore{
         fetch(`/todo/deleteTodo?id=${id}`, {
             method: "DELETE",
         }).then(() => {
-            this.tasks.map((task, index) => {
+            this.tasks.map((task) => {
                 if (task["id"] === id){
                     task.isReady = false
                 }

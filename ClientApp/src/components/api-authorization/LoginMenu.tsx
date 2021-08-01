@@ -61,12 +61,12 @@ export class LoginMenu extends React.Component<{}, State> {
     return (
       <Fragment>
         <NavItem>
-          <NavLink tag={Link} className="text-dark" to={profilePath}>
+          <NavLink tag={Link} className="text-white" to={profilePath}>
             Hello {userName}
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} className="text-dark" to={logoutPath}>
+          <NavLink tag={Link} className="text-white" to={logoutPath}>
             Logout
           </NavLink>
         </NavItem>
@@ -78,12 +78,12 @@ export class LoginMenu extends React.Component<{}, State> {
     return (
       <Fragment>
         <NavItem>
-          <NavLink tag={Link} className="text-dark" to={registerPath}>
+          <NavLink tag={Link} className="text-white" to={registerPath}>
             Register
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} className="text-dark" to={loginPath}>
+          <NavLink tag={Link} className="text-white" to={loginPath}>
             Login
           </NavLink>
         </NavItem>

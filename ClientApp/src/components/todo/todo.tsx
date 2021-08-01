@@ -1,7 +1,12 @@
-import React from 'react'
+import { observer } from 'mobx-react-lite';
+import todoStore from "../store/TodoStore"
+import React, { useState } from 'react'
 import './todo.css'
 
-const Todo: React.FC<any> = (props: any) => {
+
+const Todo: React.FC<any> = observer((props: any) => {
+    const [todoName, setName] = useState("");
+
     return (
         <div className="Todo" style={{
             position: "relative"
@@ -13,32 +18,32 @@ const Todo: React.FC<any> = (props: any) => {
                     right: "10px",
                     top: "10px",
                     width: "20px",
-                    height: "20px"
+                    height: "20px",
                 }}
                 defaultChecked={props.isComplete}
                 onClick={props.changeCompleted}
                 />
-                 <input 
-                    type="text"
-                    value={props.taskName}
+                <input
                     style={{
                         width: '200',
-                        margin: '10px'
+                        margin: '10px',
+                        borderRadius: "10px",
                     }}
-                    onChange={props.onChangeName}>
-                </input>
+                    type="text" 
+                    onChange={event => setName(event.target.value)} 
+                />
+                <button 
+                    className="ButtonEdit"
+                    onClick={() => todoStore.editTodo(props.id, todoName)}>
+                        Edit
+                </button>
                 <button 
                     className="ButtonDelete"
                     onClick={props.onDelete}>
                         Delete
                 </button>
-                <button 
-                    className="ButtonEdit"
-                    onClick={props.onEdit}>
-                        Edit
-                </button>
            </div>
     )
-}
+})
 
 export default Todo
